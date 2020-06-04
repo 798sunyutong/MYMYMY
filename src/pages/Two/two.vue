@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import func from '../../../vue-temp/vue-editor-bridge'
 export default {
     data(){
         return{
@@ -35,7 +36,9 @@ export default {
             screenheight:window.innerHeight,
             showchose:false,
             zone:[],
-            isbankonly:this.selectInfo=="开户银行"
+            isbankonly:this.selectInfo=="开户银行",
+            district:57,
+            selected:false
         }
     },
     props:[
@@ -43,7 +46,8 @@ export default {
         showInfo,
         nobottom,
         isdisabled,
-        areaArr
+        areaArr,
+
     ],
     watch:{
         areaArr:function(){
@@ -53,9 +57,9 @@ export default {
     created(){
         this.areaArr.map(item=>{
             if(window.location.origin.split('80')[0]=='http://localhost'){
-                item.imgSrc='../../../static/image/${item.No}.png'
+                item.imgSrc='../../../static/image/${item.No}.png'//本地模式
             }else{
-                item.imgSrc='./static/${item.No}.png'
+                item.imgSrc='./static/${item.No}.png'//上线模式
             }
             this.zone.push(item)
         })
@@ -65,17 +69,61 @@ export default {
             if(this.isdisabled){
                 return
             }
-            if(this.selectInfo==="交费方式" && !this.areaArr.length){
+            if(this.selectInfo==="咋给钱啊？" && !this.areaArr.length){
                 this.$emit('showChoseWarn')
                 return false
             }
             this.stop(even); 
             this.showchose=true;
+        },
+       closeadd:function(e){
+           this.move(e);
+           this.showchose=false
+       },
+       getdistrictid:function(e,code,input,index){
+           this.district=code;
+           this.District=inouy;
+           //选择当前添加active
+           this.zone.map(a => {a.selected=false});
+           this.zone.[index].selected=true;
+           this.$emit('selecteditems',{
+               No:this.district,
+               Name:this.District
+           });
+        //选取市区选项之后关闭弹层
+        this.showchose=false;
+        this.move(e)
+       },
+        // 禁止滑动
+        stop(e){
+            var event=e
+            var mo =function(){
+                event.preventDefaule();
+            };
+            document.body.style.overflow='hidden';
+            document.addEventListener('touchmove',mo,false)
+        },
+        // 禁止取消
+        move(e){
+            var mo = function(e){
+                e.preventDefaule()
+            };
+            document.body.style.overflow='hidden';
+            document.removeEventListener('touchmove'.mo,false)
+        },
+        _filter(add,name,code){
+            let result = [];
+            for(let i=0;i<add.length;i++){
+                if(code==add[i].id){
+                    result=add[i][name]
+                }
+            }
+            return result
         }
     },
 }
 </script>
 
-<style>
+<style lang='stylus' scoped>
 
 </style>
