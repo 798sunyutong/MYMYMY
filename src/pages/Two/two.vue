@@ -1,9 +1,9 @@
 <template>
-  <div id="seiect">
+  <div id="select">
         <div class="item_line" :class="{nobottom:nobottom}" @click="showModel">
           <span class="itemName">{{selectInfo}}</span>
           <img src="" alt="">
-          <span class="bachoiced" :class="{greycolocr:!showInfo}">{{showInfo?showInfo:'请选择'}}</span>
+          <span class="bechoiced" :class="{greycolocr:!showInfo}">{{showInfo?showInfo:'请选择'}}</span>
          </div>
         <div class="backs">
             <div class="showchose" v-show="showchose" @touchmove.prevent :style="{width:screenWidth +'px',height:screenheight + 'px'}"> </div>
@@ -28,8 +28,9 @@
 </template>
 
 <script>
-import func from '../../../vue-temp/vue-editor-bridge'
+// import func from '../../../vue-temp/vue-editor-bridge'
 export default {
+    name: 'two',
     data(){
         return{
             screenWidth:window.innerWidth,
@@ -85,8 +86,8 @@ export default {
            this.District=inouy;
            //选择当前添加active
            this.zone.map(a => {a.selected=false});
-           this.zone.[index].selected=true;
-           this.$emit('selecteditems',{
+           this.zone[index].selected=true;
+           this.$emit('slecteditems',{
                No:this.district,
                Name:this.District
            });
@@ -121,9 +122,44 @@ export default {
             return result
         }
     },
-}
+} 
 </script>
 
 <style lang='stylus' scoped>
+body
+    height 100%
+    overflow hidden
+    #select
+        overflow hidden
+        .item_line
+            background-color #fff
+            height 123px
+            line-height 123px
+            margin 0 30px
+            text-align left 
+            border-bottom 1px solid #e9e9e9
+            font-size 30px
+            img 
+                float right 
+                margin-top 48px
+                height 23px
+                margin-left 10px
+            .bechoiced
+                float right 
+                margin-right 20px
+                font-size 30px
+                width 35%
+                text-align right
+                overflow hidden
+                text-overflow ellipsis
+                white-space nowrap
+
+            
+        
+        .nobottom
+            border-bottom none 
+            .greycolocr
+                color #ccc
+                
 
 </style>
