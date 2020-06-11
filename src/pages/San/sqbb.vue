@@ -15,7 +15,11 @@
         </div>
         <div class="buy_info">
             <!-- 咋给钱 -->
-            <Two :areaArr='payColumns' selectInfo="咋给钱"  :showInfo='payChose.Name' @slecteditems='getPayChose' />
+            <!-- <Two :areaArr='payColumns' selectInfo="咋给钱"  :showInfo='payChose.Name' @slecteditems='getPayChose' /> -->
+           <div class="item_line">
+               <span class="itemName">交费咋交</span>
+               <span>较至被保人年满23周岁</span>
+           </div>
             <!-- 多长时间交一次 -->
             <div v-if="payChose.No != '1'&& payChose.No">
                 <Two :areaArr='payTypeColms' selectInfo="多长时间交一次钱" :showInfo='payType.Name' @slecteditems='getPayType'/>

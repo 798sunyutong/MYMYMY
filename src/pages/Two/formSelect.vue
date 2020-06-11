@@ -28,7 +28,7 @@
 </template>
 
 <script>
-// import func from '../../../vue-temp/vue-editor-bridge'
+
 export default {
     name: 'two',
     data(){
@@ -48,7 +48,6 @@ export default {
         nobottom,
         isdisabled,
         areaArr,
-
     ],
     watch:{
         areaArr:function(){

@@ -27,6 +27,14 @@ export default new Router({
       meta: {
         title: '第二页'
       }
+    },
+    {
+      path: '/san',
+      name: 'san',
+      component: san,
+      meta: {
+        title: '第三页'
+      }
     }
   ]
 })
