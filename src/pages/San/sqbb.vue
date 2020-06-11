@@ -424,6 +424,34 @@ export default {
 }
 </script>
 
-<style>
+<style <style lang="stylus">
+#YYRS
+    background #f4f4f4    
+    overflow hidden
+    position relative
+    .repons_cover
+        background #f5f5f5
+        overflow hidden
+        .pret_person
+            list-style none
+            margin-bottom 15px
+            border-bottom 1px solid #e9e9e9
+            border-top 1px solid #e9e9e9
+            overflow hidden 
+            font-size 28px
+            background #fff
+            padding-top 30px
+            padding-left 20px
+            .pre_list
+                padding 7px 28px
+                height 75px
+                line-height 64px
+                margin-bottom 30px
+                font-size 36px
+                display inline-block
+                margin-left 10px
+                border 1px solid #ff5722
+                border-radius 3px
+                text-align center
 
 </style>
