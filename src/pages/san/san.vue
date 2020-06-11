@@ -154,7 +154,7 @@ export default {
                 loadingFalg:false,
                 prenumPrice:'',
                 closeflag:false,
-                responseColunns:[
+                responseColumns:[
                     {
                         rename:'你家大宝贝',
                         renum:'B54_1',
@@ -168,7 +168,27 @@ export default {
         document.querySelector('title').innerHTML='大宝贝';
         this.openid=getParameter('openid');
         this.getByUrl = JSON.parse(sessionStorage.getItem('getByUrl'))?JSON.parse(sessionStorage.getItem('getByUrl')):{};
-        this.getList;
+        this.infoObj=Object.assign(this.infoObj,this.getByUrl);
+        this.getList();//获取白名单方法
+        this.productShow();//代理人是否支持此产品
+        this.goInsure();//提交
+        this.responseColumns.map((item)=>{
+            item.show=true;
+        })
+        this.response=this.responseColumns[0];
+        if(this.getByUrl.birth){
+            this.demoDate=new Date(this.getByUrl.birth);
+        }
+        if(this.getByUrl.sex){
+            if(this.getByUrl.sex=='F'){
+                this.manChose=false;
+            }else{
+                this.manChose=true;
+            }
+        }
+        if(this.infoObj.printStyle==false){
+            this.ifPaperColms=[{Name:'纸质保单',No:'P'}]
+        }
     },
     components:{
       Alert,
@@ -261,6 +281,72 @@ export default {
             this.ifPaper=slecteditems;
             this.goInsure();
         },
+        // 保额
+        checkSelAmount(){
+            if(!this.sel_amount){
+                this.$toast('请输入正确的基本保额')
+                this.selNotice='请重新输入'
+            }else if(this.sel_amount <10000 || this.sel%1000 !=0){
+            this.$toast('最低1万元，以1万元整数倍递增')
+            this.sel_amount='';
+            this.selNotice='请重新输入';
+            }else{
+                this.selNotice='';
+            }
+            this.goInsure();
+        },
+        closeFlags(closeflag){
+            this.closeflag=closeflags;
+        },
+        // 产品码JSON
+        getProductCode(){
+            let proDucCoddArr=[]
+            if(this.responseColumns && this.responseColumns.length){
+                this.responseColumns.forEach((item)=>{
+                    proDucCoddArr.push(item.renum)
+                })
+                return proDucCoddArr
+            }
+        },
+        // 进入时判断代理人可投保哪些险种类型
+        productShow(){
+            // json返回的产品码
+            let producCodeArr=this.getProductCode()
+            // 真正能显示的产品
+            let canSealCode=[]
+            this.loadingFlag=true;
+            this.$ajax({
+                methods:'post',
+                url:'',
+                params:{
+                    productCode:'B54',
+                    agentCode:this.infoObj.agentCode,
+                }
+            }).then(res=>{
+                this.loadingFalg=false
+                if(res.data.success=='true'){
+                    // 取交集
+                    for(let i=0;i<res.data.data.length;i++){
+                        for(let j=0;j<producCodeArr.length;j++){
+                            if(producCodeArr[j]===res.data.data[i]){
+                                canSealCode.push(producCodeArr[j])
+                            }
+                        }
+                    } 
+                    for( let i=0;i<canSealCode.length;i++){
+                        for(let j=0;j<this.responseColumns.length;j++){
+                            if(this.responseColumns[j].renum===canSealCode[i]){
+                                this.responseColumns[j].hide=false
+                            }
+                        }
+                    }
+                }else{
+                    this.$toast(res.data.message)  ;
+                    this.response={};
+                    this.goInsure()  
+                }
+            })
+        },
         // 提交
         goInsure(){
             if(this.payChose.No=='1'){
@@ -272,9 +358,63 @@ export default {
             if(this.Eletter){
                 eletter='1'
             }else{
-               eletter='0 ' 
+                eletter='0 ' 
             }
+            this.infoObj={
+                openid:this.openid,
+                yearAmount:this.yearAmount,
+                insuracename:this.insuracename,
+                yearChose:this.yearChose,
+                payChose:this.payChose,
+                manChose:this.manChose,
+                manChoseHome:this.manChoseHome,
+                age:this.age,
+                response:this.response.renum,
+                paymentMode:this.paymodeCode,
+                coverageAmount:this.sel_amount,
+                coverageCount:this.yearAmount,
+                coveragePremium:this.wan_amount,
+                planCode:'B54',
+                ifPaper:this.ifPaper.No,
+                Eletter:eletter,
+            };
+            this.infoObj=Object.assign(this.infoObj,this.getByUrl);
+            this.checkInsureBrith()
         },
+        // 选择被保人年龄后选择缴费方式等的校验
+        checkInsureBrith(){
+            if( sessionStorage.getItem('insuredBirth') &&
+                sessionStorage.getItem('insured') &&
+                sessionStorage.getItem('insured' != "01")){
+                    if(this.infoObj.payChose&&this.infoObj.yearChose&&this.infoObj.response){
+                        let insured_brith=new Date(sessionStorage.getItem('insuredBrith'));
+                        if(ageNum(insured_brith)>18){
+                            this.$toast('所选被保人，超出不年龄0——17岁限制')
+                            return false
+                        }
+                    }
+                }
+        },
+        noticeFlag(noticeFlag){
+            this.showNotice=noticeFlag;
+        },
+        showLetter(){
+            this.showNotice=true;
+            this.notice2="电子信函是保单承保后为便于客户及时掌握保单得收益和状态变化，公司寄送的各类通知、最账单及报告、万能状态报告、投连状态报告、转账对账单等"
+        },
+        letterNotice(){
+            if(this.Eletter){
+                this.showNotice=true;
+                this.notice2="若未勾选。客户将无法接收电子信函，请如实告知客户"
+            }
+            let _this=this
+            setTimeout(()=>{
+                _this.goInsure()
+            },50)
+        },
+        filters:{
+        },
+
     },
 
 }
