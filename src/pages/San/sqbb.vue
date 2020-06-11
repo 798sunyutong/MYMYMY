@@ -10,7 +10,7 @@
         </div>
         <div class="repons_cover" v-show="responsePickerShow">
             <ul class="pret_person">
-                <li class="pre_list" v-for="(item,index) in responseColumns" :key="index" :class="{'red_bg':item.show===true}">{{item_rename}}</li>
+                <li class="pre_list" v-for="(item,index) in responseColumns" :key="index" :class="{'red_bg':item.show===true , 'itemHide':item.hide===true}">{{item.rename}}</li>
             </ul> 
         </div>
         <div class="buy_info">
@@ -18,7 +18,7 @@
             <!-- <Two :areaArr='payColumns' selectInfo="咋给钱"  :showInfo='payChose.Name' @slecteditems='getPayChose' /> -->
            <div class="item_line">
                <span class="itemName">交费咋交</span>
-               <span>较至被保人年满23周岁</span>
+               <span class="bechoiced">较至被保人年满23周岁</span>
            </div>
             <!-- 多长时间交一次 -->
             <div v-if="payChose.No != '1'&& payChose.No">

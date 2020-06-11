@@ -12,7 +12,7 @@
                     <h4>
                         请选择{{selectInfo}}
                     </h4>                                                      
-                    <span @click="closeadd($event)">
+                     <span @click="closeadd($event)">
                         x
                     </span>
                 </div>
