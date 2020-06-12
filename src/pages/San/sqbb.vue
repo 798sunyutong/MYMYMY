@@ -453,6 +453,107 @@ export default {
                 border 1px solid #ff5722
                 border-radius 3px
                 text-align center
+            .pre_list:first-child
+                padding 7px 35px
+                margin-right 10px
+            .pre_list:last-child
+                padding 7px 35px
+            .red_bg  
+                background  #ffff55
+                color #f4f4f4
+            .itemHide
+                display none
+    .buy_info
+        overflow hidden
+        background #f4f4f4
+        .item_line
+            background #fff
+            min-height 123px
+            line-height 123px
+            margin 0 30px
+            text-align left   
+            border-bottom 1px solid #e9e9e9
+            font-size 30px
+            position relative
+            .red_words
+                color #ff5722
+            img
+                float right
+                margin-top 45px
+                width 28px
+            .question
+                height 38px
+                width 38px
+                text-align left
+                float none
+                margin-top 30px
+            .bechoiced
+                float right
+                margin-right 20px
+                font-size 30px
+                width 50%
+                text-align right
+                overflow hidden
+                text-overflow ellipsis
+                white-space nowrap
+            .bkline
+                display inline-block
+                line-height 40px
+                width 350px
+                float right
+                padding-top 23px
+            .greycolor
+                color #ccc
+            .otherchoiced
+                float right 
+                margin-right 80px
+            .onechliced
+                float right
+            i
+                margin-right 20px
+            .little-up
+                margin-top 25px
+                height 40px
+                line-height 40pxi
+                float left
+                width 100p
+                .yuan
+                    float right 
+                    margin-top 16px
+                    margin-left 10px
+            .little-down
+                clear both
+                font-size 20px
+                float left
+                line-height 25px
+                width 68%
+                color #999
+                margin-top 6px
+        .lastitem
+            border-bottom none
+        .selinfo
+            margin-left 0
+            margin-right 0
+            padding 0 30px
+        .high-line
+            height 149px
+        .itemamount
+            float right
+            text-align right
+            height 70px
+            font-size 30px
+            width 21%
+            margin 0 38px 8px 0
+            background #fff
+            .itemamount::-webkit-input-placeholder
+                color #ccc
+            .second
+                margin-top 14px
+                .secondyuan
+                    float right
+                    margin-top 30px
+                    
+                 
 
 
 </style>
