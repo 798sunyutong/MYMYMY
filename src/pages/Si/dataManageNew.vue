@@ -35,7 +35,7 @@
       <img v-if="menuListIndex === '8'" class="imgMask right_image" src="../../assets/tuoer/8gj.png">
       <span  v-if="menuListIndex === '1'">
         <div v-for="(items, index) in animateArr" :key="index+ '-only'" style="position:absolute;height:100%;width:100%;top:0">
-          <img class="inspectImgList" :class="{inspectImgActive : isIndex === index}" :style="{left:items.x,top:items.y,width:items.w,height:items.h}" @click="clickInspectImg(index,items)"
+          <img class="inspectImgList" :class="{inspectImgActive :isIndex === index}" :style="{left:items.x,top:items.y,width:items.w,height:items.h}" @click="clickInspectImg(index,items)"
           :src="items.imgSrc" @contextmenu.prevent="showright(items)" >
           <div v-if="items.isRun == 1 && openOrClose" class="popoverright" :style="{left:items.x1,top:items.y1}"></div>
           <div class="popover" v-if="visible && openOrClose" :style="{left:popoverLeft,top:popoverTop}">

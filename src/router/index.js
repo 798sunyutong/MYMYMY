@@ -5,6 +5,9 @@ import HelloWorld from '@/components/HelloWorld'
 // import two from '../pages/Two/two'
 import kangshun from '../pages/Si/kangshun.vue'
 import fuzujian from '../pages/Si/fuzujian.vue'
+import erzi from '../pages/Si/erzi.vue'
+import zizujian from '../pages/Si/zizujian.vue'
+import zizujianer from '../pages/Si/zizujianer.vue'
 // import dataManageNew from '../pages/Si/dataManageNew.vue'
 Vue.use(Router)
 
@@ -63,5 +66,29 @@ export default new Router({
     //     title: '父组件'
     //   }
     // }
+    {
+      path: '/Si/erzi',
+      name: 'erzi',
+      component: erzi,
+      meta: {
+        title: '大宝'
+      }
+    },
+    {
+      path: '/Si/zizujian',
+      name: 'zizujian',
+      component: zizujian,
+      meta: {
+        title: '大儿子'
+      }
+    },
+    {
+      path: '/Si/zizujianer',
+      name: 'zizujianer',
+      component: zizujianer,
+      meta: {
+        title: '二儿子'
+      }
+    },
   ]
 })
