@@ -8,6 +8,7 @@ import fuzujian from '../pages/Si/fuzujian.vue'
 import erzi from '../pages/Si/erzi.vue'
 import zizujian from '../pages/Si/zizujian.vue'
 import zizujianer from '../pages/Si/zizujianer.vue'
+import data from '../pages/daily/data.vue'
 // import dataManageNew from '../pages/Si/dataManageNew.vue'
 Vue.use(Router)
 
@@ -88,6 +89,14 @@ export default new Router({
       component: zizujianer,
       meta: {
         title: '二儿子'
+      }
+    },
+    {
+      path: '/daily/data',
+      name: 'Dailypractice',
+      component: data,
+      meta: {
+        title: '每日一练'
       }
     },
   ]
