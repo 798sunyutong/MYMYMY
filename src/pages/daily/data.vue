@@ -25,6 +25,9 @@
        <button @click="jsdigui()"> 用递归算法实现，数组长度为5且元素的随机数在2-32间不重复的值</button>
       </div>
       <button @click="spacedel()">写一个方法去掉字符串中的空格</button>
+      <button @click="laststringdel()">去除字符串中最后一个指定的字符</button>
+      <button @click="changename()">写一个方法把下划线命名转成大驼峰命名</button>
+      <button @click="changeMaxMin()">写一个把字符串大小写切换的方法</button>
   </div>
 </template>
 
@@ -70,18 +73,7 @@ export default {
         console.log(i,arr)
       },
       //写一个方法去掉字符串中的空格
-      // spacedel(){
-      //   var str=" sdfa ere trter   erte "
-      //   var str1
-      //   function del(str) {
-      //     if(typeof str==='string'){
-      //       return str1=str.split(" ").join('')
-      //     }
-      //   }
-      //   del(str)
-      //   console.log(str1,'999999999')
-      // }
-       spacedel(){
+      spacedel(){
         var str=" sdfa ere trter   erte "
         var str1
         function del(str) {
@@ -90,10 +82,51 @@ export default {
           }
         }
         del(str)
-        console.log(str1,'999999999')
-      }
+        console.log(str1,'写一个方法去掉字符串中的空格')
+      },
+      //去除字符串中最后一个指定的字符
+       laststringdel(){
+        var str="abcdefkkkkltlltl"
+        if(typeof str==='string'){
+          let del=str.lastIndexOf('t')//del返回的是字符'f',所在的下标
+          let str1 = str.substring(0, del) + str.substring(del + 1, str.length)//substring() 方法用于提取字符串中介于两个指定下标之间的字符。
+          console.log(del,str1,'去除字符串中最后一个指定的字符')
+        }
+      },
+      //写一个方法把下划线命名转成大驼峰命名
+      changename(name) {
+        let arr = name.split("");//把一个字符串分割成字符串数组。
+        arr.map((item,index)=>{
+            if(item=='-'){
+                arr.splice(index,1);//splice把index的字符去掉
+                arr[index]=arr[index].toUpperCase()//把index的字符转成大写字母
+            }
+        })
+        arr.join('')//把数组中的所有元素放入一个字符串
+        console.log("%cparams","color:red",  arr.join(''))
+      },
+      //写一个把字符串大小写切换的方法
+      changeMaxMin(){
+        var str='324asshaASDKHKJhaihASHKHkuikjk4234'
+        var regs=/^.*[A-Z]+.*$/
+        var reg=/^.*[a-z]+.*$/
+        let str1
+        for(var i=0;i<str.length;i++){
+          if(str[i]==reg){
+            str1[i]=str[i].toUpperCase()
+          }else if(str[i]==regs){
+            str1[i]=str[i].toLowerCase()
+          }else{
+            str1[i]=str[i]
+          }
+          str1.join('')
+        }
+        console.log("%cparams","color:red",str1.join(''))
+      },
     },
-
+    mounted(){
+      this.changename('-aa-bb-cc')
+    }
 }
 </script>
 
