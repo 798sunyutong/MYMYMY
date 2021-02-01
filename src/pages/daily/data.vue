@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="day">
       <div id="hd">
         每日一练
       </div>
@@ -28,6 +28,18 @@
       <button @click="laststringdel()">去除字符串中最后一个指定的字符</button>
       <button @click="changename()">写一个方法把下划线命名转成大驼峰命名</button>
       <button @click="changeMaxMin()">写一个把字符串大小写切换的方法</button>
+      <button @click="deltabANDline()">写一个去除制表符和换行符的方法</button>
+      <div class="San">
+        <span>用css创建一个三角形，并简述原理</span>
+        <span>原理</span>
+        <div class="SJX"></div>
+      </div>
+      <label>看看有啥意思</label>
+      <button @click="statistics()">统计某一字符或字符串在另一个字符串中出现的次数</button>
+      <button @click="strencrypt()">写一个加*字符串的方法</button>
+      <button @click="encryptCode()">写一个加密字符串的方法(可以编解码传给后台的那种)</button>
+      <button @click="stypeof()">写一个判断数据类型的方法</button>
+      <button @click="Mainfunction(callback)">简要描述下什么是回调函数并写一个例子出来</button>
   </div>
 </template>
 
@@ -108,29 +120,97 @@ export default {
       //写一个把字符串大小写切换的方法
       changeMaxMin(){
         var str='324asshaASDKHKJhaihASHKHkuikjk4234'
-        var regs=/^.*[A-Z]+.*$/
-        var reg=/^.*[a-z]+.*$/
-        let str1
-        for(var i=0;i<str.length;i++){
-          if(str[i]==reg){
-            str1[i]=str[i].toUpperCase()
-          }else if(str[i]==regs){
-            str1[i]=str[i].toLowerCase()
+        let Str=str.split('')
+        for(var i=0;i<Str.length;i++){
+          if(Str[i].toUpperCase()==Str[i]){
+            Str[i]=Str[i].toLowerCase()
+          }else if(Str[i].toLowerCase()==Str[i]){
+            Str[i]=Str[i].toUpperCase()
           }else{
-            str1[i]=str[i]
+            Str[i]=Str[i]
           }
-          str1.join('')
+          Str.join('')
         }
-        console.log("%cparams","color:red",str1.join(''))
+        console.log("%cparams","color:red",Str.join(''))
+      },
+      //写一个去除制表符和换行符的方法
+      deltabANDline(){
+        var str='sdfa\tsef\ndfdsd\rfsadf'
+        console.log(str)
+        var Str
+       Str=str.replace(/[\r\t\n]/g,"")
+        console.log("%cparams","color:red",Str)
+      },
+      //统计某一字符或字符串在另一个字符串中出现的次数
+      statistics(){
+        let str='sdjsdjdjdjdjdjddddddjjsjjjdj'
+        console.log(str.split('sdj'))
+        let str1=(str.split('sdj')).length-1
+        let str2='j'
+        console.log("%cparams","color:red", str1)
+      },
+      //写一个加密字符串的方法
+      strencrypt(){
+        let str='sdkijkjm'
+        let Str=str.split('')
+        let tempy=[]
+        for(let i=0;i<Str.length;i++){
+          if(typeof Str[i]=='string'){
+            tempy[i]='*'
+          }
+        }
+        this.jm=tempy.join('') 
+        console.log(str, this.jm)
+      },
+      //写一个加密字符串的方法(可以编解码传给后台的那种)
+      encryptCode(){
+        var str='woshixiaokeai90'
+        var estr=''
+        for(let i=0;i<str.length;i++){
+          estr+=str.charCodeAt(i)
+          estr+=','
+        }
+        console.log("%cparams","color:red", str,estr)
+      },
+      //写一个判断数据类型的方法
+      stypeof(){
+        var str1='wewewe'
+        var num=12
+        var arr=[2,4,6,8,1]
+        //去掉[object]的正则，\w 单词字符(字母、数字、下划线)，+ 至少出现一次，[]	同样表示或者的意思[abc],匹配a, b ,c中任意一个
+        // ()小括号表示匹配括号中全部字符
+        // [标记一个中括号表达式的开始。要匹配 [，请使用 \[。
+        // \转义字符 如上基本符号匹配都需要转义字符   如 \*  表示匹配*号
+        let reg=/\[object (\w+)\]/
+        //获取传入的[object ]类型
+        let type=Object.prototype.toString.call(arr)
+        //利用.match方法，查找字符中指定的值，用于匹配正则。
+        let res=type.match(reg)
+        //返回的是一个数组，第一个是整个字符串，第二个是匹配规则的的类型
+        console.log(res && res[1].toLowerCase())
+      },
+      //简要描述下什么是回调函数并写一个例子出来
+      Mainfunction(callback){
+        callback()
+        console.log('我是主函数')
+      },
+       //回调函数
+      callback(){
+        setTimeout("console.log('我是回调函数')", 300);
       },
     },
     mounted(){
       this.changename('-aa-bb-cc')
+      //定义主函数，回调函数作为参数
+      this.Mainfunction(this.callback)
     }
 }
 </script>
 
 <style>
+.day{
+  padding: 50px 50px;
+}
 #hd{
 		height: 50px;
 		background: #666;
@@ -189,6 +269,23 @@ export default {
     height: 200px;
     background-color: pink;
     margin-left: -60px;
+  }
+  .San{
+    width: 200px;
+    height: 200px;
+    background-color: gray;
+    color: cornsilk;
+  }
+  .SJX{
+    width: 0px;
+    height: 0px;
+    border-top: 100px solid blue;
+    /* border-left: 100px solid pink;
+    border-right: 100px solid yellow;
+    border-bottom: 100px  solid red; */
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+
   }
 </style>
 
