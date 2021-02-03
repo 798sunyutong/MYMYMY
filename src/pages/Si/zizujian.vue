@@ -21,7 +21,7 @@ export default {
     methods: {
         time(){
             let N=new Date().getFullYear()
-            let Y=(new Date().getMonth()<10) ? '0'+Date().getMonth() : new Date().getMonth()+1
+            let Y=new Date().getMonth()<10 ? '0'+Date().getMonth() : new Date().getMonth()+1
             let R=new Date().getDate()<10 ? '0'+new Date().getDate() : new Date().getDate()
             let s=new Date().getHours()<10 ? '0'+new Date().getHours() : new Date().getHours()
             let f=new Date().getMinutes()<10 ? '0'+new Date().getMinutes() : new Date().getMinutes()
